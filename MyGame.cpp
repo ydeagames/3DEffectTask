@@ -59,10 +59,10 @@ void MyGame::Render(GameContext& context)
 	// •`‰æ
 	m_primitiveBatch->Begin();
 	m_primitiveBatch->DrawQuad(
-		VertexPositionColor(Vector3(-.5f, -.5f, 0), Colors::White),
-		VertexPositionColor(Vector3(-.5f, +.5f, 0), Colors::White),
-		VertexPositionColor(Vector3(+.5f, +.5f, 0), Colors::White),
-		VertexPositionColor(Vector3(+.5f, -.5f, 0), Colors::White));
+		VertexPositionColor(Vector3(-.5f, -.5f, 0), Colors::Red),
+		VertexPositionColor(Vector3(-.5f, +.5f, 0), Colors::Red),
+		VertexPositionColor(Vector3(+.5f, +.5f, 0), Colors::Red),
+		VertexPositionColor(Vector3(+.5f, -.5f, 0), Colors::Red));
 	m_primitiveBatch->End();
 }
 

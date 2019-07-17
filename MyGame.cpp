@@ -49,7 +49,7 @@ void MyGame::Render(GameContext& context)
 	ctx->OMSetBlendState(context.GetStates().Opaque(), nullptr, 0xFFFFFFFF);
 	ctx->OMSetDepthStencilState(context.GetStates().DepthDefault(), 0);
 
-	m_basicEffect->SetWorld(Matrix::Identity);
+	m_basicEffect->SetWorld(Matrix::CreateTranslation(Vector3::Left * float(context.GetTimer().GetTotalSeconds()) * .5f));
 	m_basicEffect->SetView(context.GetCamera().view);
 	m_basicEffect->SetProjection(context.GetCamera().projection);
 
@@ -59,10 +59,10 @@ void MyGame::Render(GameContext& context)
 	// •`‰æ
 	m_primitiveBatch->Begin();
 	m_primitiveBatch->DrawQuad(
-		VertexPositionColor(Vector3(-.5f, -.5f, 0), Colors::Red),
-		VertexPositionColor(Vector3(-.5f, +.5f, 0), Colors::Red),
-		VertexPositionColor(Vector3(+.5f, +.5f, 0), Colors::Red),
-		VertexPositionColor(Vector3(+.5f, -.5f, 0), Colors::Red));
+		VertexPositionColor(Vector3(-.5f, -.5f, 0), Colors::White),
+		VertexPositionColor(Vector3(-.5f, +.5f, 0), Colors::White),
+		VertexPositionColor(Vector3(+.5f, +.5f, 0), Colors::White),
+		VertexPositionColor(Vector3(+.5f, -.5f, 0), Colors::White));
 	m_primitiveBatch->End();
 }
 

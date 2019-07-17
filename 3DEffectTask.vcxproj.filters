@@ -39,6 +39,7 @@
     <ClInclude Include="GameContext.h">
       <Filter>Framework</Filter>
     </ClInclude>
+    <ClInclude Include="BinaryFile.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -59,6 +60,7 @@
       <Filter>Framework</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="BinaryFile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
@@ -75,5 +77,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="3DPGPropertySheet.props" />
+    <None Include="Particle.hlsli" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="ParticleGS.hlsl" />
+    <FxCompile Include="ParticlePS.hlsl" />
+    <FxCompile Include="ParticleVS.hlsl" />
   </ItemGroup>
 </Project>

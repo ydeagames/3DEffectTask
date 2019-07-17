@@ -49,7 +49,7 @@ void MyGame::Render(GameContext& context)
 	ctx->OMSetBlendState(context.GetStates().Opaque(), nullptr, 0xFFFFFFFF);
 	ctx->OMSetDepthStencilState(context.GetStates().DepthDefault(), 0);
 
-	m_basicEffect->SetWorld(Matrix::CreateTranslation(Vector3::Left * float(context.GetTimer().GetTotalSeconds()) * .5f));
+	m_basicEffect->SetWorld(Matrix::CreateTranslation(Vector3::Transform(Vector3::Left, Matrix::CreateRotationZ(-float(context.GetTimer().GetTotalSeconds())))));
 	m_basicEffect->SetView(context.GetCamera().view);
 	m_basicEffect->SetProjection(context.GetCamera().projection);
 

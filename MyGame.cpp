@@ -79,26 +79,35 @@ void MyGame::Render(GameContext& context)
 	// グリッド床描画
 	//m_pGridFloor->draw(context.GetDR().GetD3DDeviceContext(), context.GetCamera().view, context.GetCamera().projection);
 
-	ID3D11BlendState* blendstate = context.GetStates().NonPremultiplied();
-	// 透明判定処理
-	ctx->OMSetBlendState(blendstate, nullptr, 0xFFFFFFFF);
-	// 深度バッファに書き込み参照する
-	ctx->OMSetDepthStencilState(context.GetStates().DepthRead(), 0);
-	// カリングは右周り（時計回り）
-	ctx->RSSetState(context.GetStates().CullClockwise());
-
-	ID3D11SamplerState* sampler[1] = { context.GetStates().LinearClamp() };
-	ctx->PSSetSamplers(0, 1, sampler);
-
-	ctx->IASetInputLayout(m_inputLayout.Get());
+	// モデル
+	{
+		// 描画
+		ctx->VSSetShader(nullptr, nullptr, 0);
+		ctx->PSSetShader(nullptr, nullptr, 0);
+		ctx->GSSetShader(nullptr, nullptr, 0);
+		m_model->Draw(ctx, context.GetStates(), Matrix::Identity, context.GetCamera().view, context.GetCamera().projection);
+	}
 
 	// オブジェ
 	{
+		ID3D11BlendState* blendstate = context.GetStates().NonPremultiplied();
+		// 透明判定処理
+		ctx->OMSetBlendState(blendstate, nullptr, 0xFFFFFFFF);
+		// 深度バッファに書き込み参照する
+		ctx->OMSetDepthStencilState(context.GetStates().DepthRead(), 0);
+		// カリングは右周り（時計回り）
+		ctx->RSSetState(context.GetStates().CullClockwise());
+
+		ID3D11SamplerState* sampler[1] = { context.GetStates().LinearClamp() };
+		ctx->PSSetSamplers(0, 1, sampler);
+
+		ctx->IASetInputLayout(m_inputLayout.Get());
+
 		// 定数バッファ更新
 		ConstBuffer cbuff;
 		cbuff.matView = context.GetCamera().view.Transpose();
 		cbuff.matProj = context.GetCamera().projection.Transpose();
-		cbuff.matWorld = Matrix::CreateTranslation(Vector3::Left).Transpose();
+		cbuff.matWorld = Matrix::CreateTranslation(Vector3::Transform(Vector3::Left, Matrix::CreateRotationY(-float(context.GetTimer().GetTotalSeconds())))).Transpose();
 		cbuff.Diffuse = Vector4(1, 1, 1, 1);
 		cbuff.time = float(context.GetTimer().GetTotalSeconds());
 
@@ -129,15 +138,6 @@ void MyGame::Render(GameContext& context)
 		m_primitiveBatch->Begin();
 		m_primitiveBatch->DrawIndexed(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST, indices.data(), indices.size(), vertices.data(), vertices.size());
 		m_primitiveBatch->End();
-	}
-
-	// モデル
-	{
-		// 描画
-		ctx->VSSetShader(nullptr, nullptr, 0);
-		ctx->PSSetShader(nullptr, nullptr, 0);
-		ctx->GSSetShader(nullptr, nullptr, 0);
-		m_model->Draw(ctx, context.GetStates(), Matrix::Identity, context.GetCamera().view, context.GetCamera().projection);
 	}
 }
 

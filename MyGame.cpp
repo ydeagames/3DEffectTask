@@ -66,10 +66,10 @@ void MyGame::Render(GameContext& context)
 		VertexPositionColor(Vector3::Transform(Vector3::Up, Matrix::CreateRotationZ(-XM_2PI / 6 * 5)), Colors::White),
 	};
 	static std::vector<uint16_t> indices = {
-		5, 0, 4, 0, 3, 0, 2, 0, 1,
+		0, 2, 4, 1, 3, 5,
 	};
 	m_primitiveBatch->Begin();
-	m_primitiveBatch->DrawIndexed(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP, indices.data(), indices.size(), vertices.data(), vertices.size());
+	m_primitiveBatch->DrawIndexed(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST, indices.data(), indices.size(), vertices.data(), vertices.size());
 	m_primitiveBatch->End();
 }
 

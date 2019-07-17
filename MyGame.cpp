@@ -89,6 +89,7 @@ void MyGame::Render(GameContext& context)
 	}
 
 	// オブジェ
+	auto Draw = [&](const Matrix& world)
 	{
 		ID3D11BlendState* blendstate = context.GetStates().NonPremultiplied();
 		// 透明判定処理
@@ -107,7 +108,7 @@ void MyGame::Render(GameContext& context)
 		ConstBuffer cbuff;
 		cbuff.matView = context.GetCamera().view.Transpose();
 		cbuff.matProj = context.GetCamera().projection.Transpose();
-		cbuff.matWorld = Matrix::CreateTranslation(Vector3::Transform(Vector3::Left, Matrix::CreateRotationY(-float(context.GetTimer().GetTotalSeconds())))).Transpose();
+		cbuff.matWorld = world.Transpose();
 		cbuff.Diffuse = Vector4(1, 1, 1, 1);
 		cbuff.time = float(context.GetTimer().GetTotalSeconds());
 
@@ -138,7 +139,9 @@ void MyGame::Render(GameContext& context)
 		m_primitiveBatch->Begin();
 		m_primitiveBatch->DrawIndexed(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST, indices.data(), indices.size(), vertices.data(), vertices.size());
 		m_primitiveBatch->End();
-	}
+	};
+	Draw(Matrix::CreateTranslation(Vector3::Transform(Vector3::Left, Matrix::CreateRotationY(-float(context.GetTimer().GetTotalSeconds())))));
+	Draw(Matrix::CreateTranslation(Vector3::Transform(Vector3::Left, Matrix::CreateRotationY(-XMConvertToRadians(90) - float(context.GetTimer().GetTotalSeconds())))) * Matrix::CreateRotationZ(XMConvertToRadians(90)));
 }
 
 void MyGame::Finalize(GameContext& context)

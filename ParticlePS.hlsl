@@ -8,5 +8,6 @@ float4 main(PS_INPUT input) : SV_TARGET
 {
 	float4 diff = tex.Sample(samLinear, input.Tex);
 	float4 diff2 = tex2.Sample(samLinear, input.Tex);
-	return float4(1, 1, 1, diff.a);
+	float t = (sin(time) + 1) * .5f;
+	return float4(t, 1, t, diff.a);
 }

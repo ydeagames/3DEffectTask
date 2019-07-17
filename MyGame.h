@@ -11,12 +11,32 @@ class MyGame
 	// グリッド床
 	std::unique_ptr<GridFloor>				m_pGridFloor;
 
-	// エフェクト
-	std::unique_ptr<DirectX::BasicEffect> m_basicEffect;
+	// シェーダー変数
+	struct alignas(16) ConstBuffer
+	{
+		DirectX::SimpleMath::Matrix		matWorld;
+		DirectX::SimpleMath::Matrix		matView;
+		DirectX::SimpleMath::Matrix		matProj;
+		DirectX::SimpleMath::Vector4	Diffuse;
+		float time;
+	};
+
+	// レイアウト
+	static const std::vector<D3D11_INPUT_ELEMENT_DESC> INPUT_LAYOUT;
 	// プリミティブバッチ
-	std::unique_ptr<DirectX::PrimitiveBatch<DirectX::VertexPositionColor>>	m_primitiveBatch;
+	std::unique_ptr<DirectX::PrimitiveBatch<DirectX::VertexPositionColorTexture>>	m_primitiveBatch;
 	// インプットレイアウト
 	Microsoft::WRL::ComPtr<ID3D11InputLayout> m_inputLayout;
+	// 頂点シェーダ
+	Microsoft::WRL::ComPtr<ID3D11VertexShader> m_VertexShader;
+	// ピクセルシェーダ
+	Microsoft::WRL::ComPtr<ID3D11PixelShader> m_PixelShader;
+	// ジオメトリシェーダ
+	Microsoft::WRL::ComPtr<ID3D11GeometryShader> m_GeometryShader;
+	// バッファ
+	Microsoft::WRL::ComPtr<ID3D11Buffer> m_CBuffer;
+	// テクスチャハンドル
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_texture;
 
 public:
 	// 生成

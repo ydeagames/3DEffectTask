@@ -98,7 +98,7 @@ void MyGame::Render(GameContext& context)
 	ctx->GSSetConstantBuffers(0, 1, cb);
 	ctx->PSSetConstantBuffers(0, 1, cb);
 
-	ID3D11SamplerState* sampler[1] = { context.GetStates().LinearWrap() };
+	ID3D11SamplerState* sampler[1] = { context.GetStates().LinearClamp() };
 	ctx->PSSetSamplers(0, 1, sampler);
 
 	ctx->VSSetShader(m_VertexShader.Get(), nullptr, 0);

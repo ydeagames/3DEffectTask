@@ -58,14 +58,15 @@ void MyGame::Render(GameContext& context)
 
 	// •`‰æ
 	static std::vector<VertexPositionColor> vertices = {
-		VertexPositionColor(Vector3::Transform(Vector3::Up, Matrix::CreateRotationZ(-XM_2PI / 5 * 0)), Colors::White),
-		VertexPositionColor(Vector3::Transform(Vector3::Up, Matrix::CreateRotationZ(-XM_2PI / 5 * 1)), Colors::White),
-		VertexPositionColor(Vector3::Transform(Vector3::Up, Matrix::CreateRotationZ(-XM_2PI / 5 * 2)), Colors::White),
-		VertexPositionColor(Vector3::Transform(Vector3::Up, Matrix::CreateRotationZ(-XM_2PI / 5 * 3)), Colors::White),
-		VertexPositionColor(Vector3::Transform(Vector3::Up, Matrix::CreateRotationZ(-XM_2PI / 5 * 4)), Colors::White),
+		VertexPositionColor(Vector3::Transform(Vector3::Up, Matrix::CreateRotationZ(-XM_2PI / 6 * 0)), Colors::White),
+		VertexPositionColor(Vector3::Transform(Vector3::Up, Matrix::CreateRotationZ(-XM_2PI / 6 * 1)), Colors::White),
+		VertexPositionColor(Vector3::Transform(Vector3::Up, Matrix::CreateRotationZ(-XM_2PI / 6 * 2)), Colors::White),
+		VertexPositionColor(Vector3::Transform(Vector3::Up, Matrix::CreateRotationZ(-XM_2PI / 6 * 3)), Colors::White),
+		VertexPositionColor(Vector3::Transform(Vector3::Up, Matrix::CreateRotationZ(-XM_2PI / 6 * 4)), Colors::White),
+		VertexPositionColor(Vector3::Transform(Vector3::Up, Matrix::CreateRotationZ(-XM_2PI / 6 * 5)), Colors::White),
 	};
 	static std::vector<uint16_t> indices = {
-		4, 0, 3, 0, 2, 0, 1,
+		5, 0, 4, 0, 3, 0, 2, 0, 1,
 	};
 	m_primitiveBatch->Begin();
 	m_primitiveBatch->DrawIndexed(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP, indices.data(), indices.size(), vertices.data(), vertices.size());

@@ -38,6 +38,8 @@ class MyGame
 	// テクスチャハンドル
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_texture;
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_texture2;
+	// モデル
+	std::unique_ptr<DirectX::Model> m_model;
 
 public:
 	// 生成

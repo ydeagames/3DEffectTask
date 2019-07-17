@@ -37,6 +37,7 @@ class MyGame
 	Microsoft::WRL::ComPtr<ID3D11Buffer> m_CBuffer;
 	// テクスチャハンドル
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_texture;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_texture2;
 
 public:
 	// 生成

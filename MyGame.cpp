@@ -49,6 +49,7 @@ void MyGame::Initialize(GameContext& context)
 
 	// テクスチャのロード
 	CreateWICTextureFromFile(device, L"Resources/Textures/image01.png", nullptr, m_texture.GetAddressOf());
+	CreateWICTextureFromFile(device, L"Resources/Textures/floor.png", nullptr, m_texture2.GetAddressOf());
 
 	// バッファの作成
 	D3D11_BUFFER_DESC bd;
@@ -104,7 +105,7 @@ void MyGame::Render(GameContext& context)
 	ctx->VSSetShader(m_VertexShader.Get(), nullptr, 0);
 	ctx->PSSetShader(m_PixelShader.Get(), nullptr, 0);
 	ctx->PSSetShaderResources(0, 1, m_texture.GetAddressOf());
-	//ctx->PSSetShaderResources(1, 1, m_texture2.GetAddressOf());
+	ctx->PSSetShaderResources(1, 1, m_texture2.GetAddressOf());
 	ctx->GSSetShader(m_GeometryShader.Get(), nullptr, 0);
 
 	ctx->IASetInputLayout(m_inputLayout.Get());
